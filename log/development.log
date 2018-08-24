@@ -7595,3 +7595,507 @@ Processing by Api::V1::SentencesController#index as */*
 Completed 200 OK in 8ms (Views: 7.8ms | ActiveRecord: 0.4ms)
 
 
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSentence Create (17.5ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Hi how are you"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:38:21.795862"], ["updated_at", "2018-08-24 17:38:21.795862"]]
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:4
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:4
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:4
+  [1m[35m (220.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ArticuSnake_development"[0m
+  ↳ bin/rails:4
+  [1m[35m (133.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ArticuSnake_test"[0m
+  ↳ bin/rails:4
+  [1m[35m (373.4ms)[0m  [1m[35mCREATE DATABASE "ArticuSnake_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:4
+  [1m[35m (267.4ms)[0m  [1m[35mCREATE DATABASE "ArticuSnake_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:4
+  [1m[35mSQL (2.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "sentences" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (40.1ms)[0m  [1m[35mCREATE TABLE "sentences" ("id" bigserial primary key, "content" character varying, "language" character varying, "difficulty" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_sentences" CASCADE[0m
+  ↳ db/schema.rb:26
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "user_sentences" ("id" bigserial primary key, "user_id" bigint, "sentence_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:26
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX  "index_user_sentences_on_sentence_id" ON "user_sentences"  ("sentence_id")[0m
+  ↳ db/schema.rb:26
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_user_sentences_on_user_id" ON "user_sentences"  ("user_id")[0m
+  ↳ db/schema.rb:26
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:35
+  [1m[35m (11.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "score" integer DEFAULT 0, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:35
+  [1m[35m (32.1ms)[0m  [1m[35mALTER TABLE "user_sentences" ADD CONSTRAINT "fk_rails_bb2087498b"
+FOREIGN KEY ("sentence_id")
+  REFERENCES "sentences" ("id")
+[0m
+  ↳ db/schema.rb:42
+  [1m[35m (6.7ms)[0m  [1m[35mALTER TABLE "user_sentences" ADD CONSTRAINT "fk_rails_9d5239b65a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:43
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (2.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20180821154950)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (9.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20180821145005),
+(20180821154547);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-08-24 17:39:06.273234"], ["updated_at", "2018-08-24 17:39:06.273234"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "sentences" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (10.6ms)[0m  [1m[35mCREATE TABLE "sentences" ("id" bigserial primary key, "content" character varying, "language" character varying, "difficulty" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_sentences" CASCADE[0m
+  ↳ db/schema.rb:26
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE TABLE "user_sentences" ("id" bigserial primary key, "user_id" bigint, "sentence_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:26
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE  INDEX  "index_user_sentences_on_sentence_id" ON "user_sentences"  ("sentence_id")[0m
+  ↳ db/schema.rb:26
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_user_sentences_on_user_id" ON "user_sentences"  ("user_id")[0m
+  ↳ db/schema.rb:26
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:35
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "score" integer DEFAULT 0, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:35
+  [1m[35m (4.3ms)[0m  [1m[35mALTER TABLE "user_sentences" ADD CONSTRAINT "fk_rails_bb2087498b"
+FOREIGN KEY ("sentence_id")
+  REFERENCES "sentences" ("id")
+[0m
+  ↳ db/schema.rb:42
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "user_sentences" ADD CONSTRAINT "fk_rails_9d5239b65a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:43
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20180821154950)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20180821145005),
+(20180821154547);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-08-24 17:39:06.398893"], ["updated_at", "2018-08-24 17:39:06.398893"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::InternalMetadata Update (1.5ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2018-08-24 17:39:06.404991"], ["key", "environment"]]
+  ↳ bin/rails:4
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:10
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Kai"], ["created_at", "2018-08-24 17:39:06.466048"], ["updated_at", "2018-08-24 17:39:06.466048"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sean"], ["created_at", "2018-08-24 17:39:06.468900"], ["updated_at", "2018-08-24 17:39:06.468900"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Dan"], ["created_at", "2018-08-24 17:39:06.471033"], ["updated_at", "2018-08-24 17:39:06.471033"]]
+  ↳ db/seeds.rb:12
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:13
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Tyrion"], ["created_at", "2018-08-24 17:39:06.473042"], ["updated_at", "2018-08-24 17:39:06.473042"]]
+  ↳ db/seeds.rb:13
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:13
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Tywin"], ["created_at", "2018-08-24 17:39:06.474961"], ["updated_at", "2018-08-24 17:39:06.474961"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (2.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:16
+  [1m[36mSentence Create (0.8ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "pizza"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.498808"], ["updated_at", "2018-08-24 17:39:06.498808"]]
+  ↳ db/seeds.rb:16
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:16
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:17
+  [1m[36mSentence Create (0.5ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "It's too hot outside"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.502587"], ["updated_at", "2018-08-24 17:39:06.502587"]]
+  ↳ db/seeds.rb:17
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:17
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:18
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "The weather is nice today"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.505434"], ["updated_at", "2018-08-24 17:39:06.505434"]]
+  ↳ db/seeds.rb:18
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:18
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "I ate soup for lunch"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.510035"], ["updated_at", "2018-08-24 17:39:06.510035"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:20
+  [1m[36mSentence Create (2.2ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Your dog is cute"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.512967"], ["updated_at", "2018-08-24 17:39:06.512967"]]
+  ↳ db/seeds.rb:20
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:20
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:21
+  [1m[36mSentence Create (0.3ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "I like pie"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.519220"], ["updated_at", "2018-08-24 17:39:06.519220"]]
+  ↳ db/seeds.rb:21
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:21
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "I am groot"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.521918"], ["updated_at", "2018-08-24 17:39:06.521918"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:23
+  [1m[36mSentence Create (0.5ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Lannister always repays his debts"], ["language", "english"], ["difficulty", 2], ["created_at", "2018-08-24 17:39:06.525137"], ["updated_at", "2018-08-24 17:39:06.525137"]]
+  ↳ db/seeds.rb:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:23
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:24
+  [1m[36mSentence Create (0.5ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Eat my shorts"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.528079"], ["updated_at", "2018-08-24 17:39:06.528079"]]
+  ↳ db/seeds.rb:24
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:24
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:25
+  [1m[36mSentence Create (0.5ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "May the force be with you"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.531847"], ["updated_at", "2018-08-24 17:39:06.531847"]]
+  ↳ db/seeds.rb:25
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:25
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:26
+  [1m[36mSentence Create (0.5ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "And my axe"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.535023"], ["updated_at", "2018-08-24 17:39:06.535023"]]
+  ↳ db/seeds.rb:26
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:27
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "My precious"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.537911"], ["updated_at", "2018-08-24 17:39:06.537911"]]
+  ↳ db/seeds.rb:27
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:27
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "If you're not first you're last"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.540724"], ["updated_at", "2018-08-24 17:39:06.540724"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:29
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Anyways here's wonderwall"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:39:06.543740"], ["updated_at", "2018-08-24 17:39:06.543740"]]
+  ↳ db/seeds.rb:29
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:29
+  [1m[36mSentence Load (0.6ms)[0m  [1m[34mSELECT  "sentences".* FROM "sentences" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:4
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:4
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:4
+  [1m[35m (128.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ArticuSnake_development"[0m
+  ↳ bin/rails:4
+  [1m[35m (128.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ArticuSnake_test"[0m
+  ↳ bin/rails:4
+  [1m[35m (378.1ms)[0m  [1m[35mCREATE DATABASE "ArticuSnake_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:4
+  [1m[35m (252.7ms)[0m  [1m[35mCREATE DATABASE "ArticuSnake_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:4
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "sentences" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (10.8ms)[0m  [1m[35mCREATE TABLE "sentences" ("id" bigserial primary key, "content" character varying, "language" character varying, "difficulty" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_sentences" CASCADE[0m
+  ↳ db/schema.rb:26
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "user_sentences" ("id" bigserial primary key, "user_id" bigint, "sentence_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:26
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_user_sentences_on_sentence_id" ON "user_sentences"  ("sentence_id")[0m
+  ↳ db/schema.rb:26
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_user_sentences_on_user_id" ON "user_sentences"  ("user_id")[0m
+  ↳ db/schema.rb:26
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:35
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "score" integer DEFAULT 0, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:35
+  [1m[35m (3.7ms)[0m  [1m[35mALTER TABLE "user_sentences" ADD CONSTRAINT "fk_rails_bb2087498b"
+FOREIGN KEY ("sentence_id")
+  REFERENCES "sentences" ("id")
+[0m
+  ↳ db/schema.rb:42
+  [1m[35m (5.8ms)[0m  [1m[35mALTER TABLE "user_sentences" ADD CONSTRAINT "fk_rails_9d5239b65a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:43
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20180821154950)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20180821145005),
+(20180821154547);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (1.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-08-24 17:41:16.206321"], ["updated_at", "2018-08-24 17:41:16.206321"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "sentences" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE TABLE "sentences" ("id" bigserial primary key, "content" character varying, "language" character varying, "difficulty" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_sentences" CASCADE[0m
+  ↳ db/schema.rb:26
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "user_sentences" ("id" bigserial primary key, "user_id" bigint, "sentence_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:26
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE  INDEX  "index_user_sentences_on_sentence_id" ON "user_sentences"  ("sentence_id")[0m
+  ↳ db/schema.rb:26
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE  INDEX  "index_user_sentences_on_user_id" ON "user_sentences"  ("user_id")[0m
+  ↳ db/schema.rb:26
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:35
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "score" integer DEFAULT 0, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:35
+  [1m[35m (3.5ms)[0m  [1m[35mALTER TABLE "user_sentences" ADD CONSTRAINT "fk_rails_bb2087498b"
+FOREIGN KEY ("sentence_id")
+  REFERENCES "sentences" ("id")
+[0m
+  ↳ db/schema.rb:42
+  [1m[35m (2.6ms)[0m  [1m[35mALTER TABLE "user_sentences" ADD CONSTRAINT "fk_rails_9d5239b65a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:43
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20180821154950)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20180821145005),
+(20180821154547);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-08-24 17:41:16.320792"], ["updated_at", "2018-08-24 17:41:16.320792"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:4
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::InternalMetadata Update (0.5ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2018-08-24 17:41:16.328830"], ["key", "environment"]]
+  ↳ bin/rails:4
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Kai"], ["created_at", "2018-08-24 17:41:16.379571"], ["updated_at", "2018-08-24 17:41:16.379571"]]
+  ↳ db/seeds.rb:9
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:10
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sean"], ["created_at", "2018-08-24 17:41:16.382525"], ["updated_at", "2018-08-24 17:41:16.382525"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Dan"], ["created_at", "2018-08-24 17:41:16.384562"], ["updated_at", "2018-08-24 17:41:16.384562"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Tyrion"], ["created_at", "2018-08-24 17:41:16.386528"], ["updated_at", "2018-08-24 17:41:16.386528"]]
+  ↳ db/seeds.rb:12
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:13
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Tywin"], ["created_at", "2018-08-24 17:41:16.388549"], ["updated_at", "2018-08-24 17:41:16.388549"]]
+  ↳ db/seeds.rb:13
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:13
+  [1m[35m (4.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:15
+  [1m[36mSentence Create (0.9ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Show me babies"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.423348"], ["updated_at", "2018-08-24 17:41:16.423348"]]
+  ↳ db/seeds.rb:15
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:15
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:16
+  [1m[36mSentence Create (0.9ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "It's too hot outside"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.427118"], ["updated_at", "2018-08-24 17:41:16.427118"]]
+  ↳ db/seeds.rb:16
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:16
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:17
+  [1m[36mSentence Create (0.5ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "The weather is nice today"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.430969"], ["updated_at", "2018-08-24 17:41:16.430969"]]
+  ↳ db/seeds.rb:17
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:17
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:18
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "I ate soup for lunch"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.433881"], ["updated_at", "2018-08-24 17:41:16.433881"]]
+  ↳ db/seeds.rb:18
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:18
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Your dog is cute"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.436940"], ["updated_at", "2018-08-24 17:41:16.436940"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:20
+  [1m[36mSentence Create (0.5ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "I like pie"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.439925"], ["updated_at", "2018-08-24 17:41:16.439925"]]
+  ↳ db/seeds.rb:20
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:20
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:21
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "I am groot"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.442846"], ["updated_at", "2018-08-24 17:41:16.442846"]]
+  ↳ db/seeds.rb:21
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:21
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mSentence Create (0.5ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "A Lannister always repays his debts"], ["language", "english"], ["difficulty", 2], ["created_at", "2018-08-24 17:41:16.445996"], ["updated_at", "2018-08-24 17:41:16.445996"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:23
+  [1m[36mSentence Create (0.5ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Eat my shorts"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.448895"], ["updated_at", "2018-08-24 17:41:16.448895"]]
+  ↳ db/seeds.rb:23
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:23
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:24
+  [1m[36mSentence Create (0.5ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "May the force be with you"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.452321"], ["updated_at", "2018-08-24 17:41:16.452321"]]
+  ↳ db/seeds.rb:24
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:24
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:25
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "And my axe"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.455091"], ["updated_at", "2018-08-24 17:41:16.455091"]]
+  ↳ db/seeds.rb:25
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:25
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:26
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "My precious"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.457927"], ["updated_at", "2018-08-24 17:41:16.457927"]]
+  ↳ db/seeds.rb:26
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:27
+  [1m[36mSentence Create (0.3ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "If you're not first you're last"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.460739"], ["updated_at", "2018-08-24 17:41:16.460739"]]
+  ↳ db/seeds.rb:27
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:27
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mSentence Create (0.4ms)[0m  [1m[32mINSERT INTO "sentences" ("content", "language", "difficulty", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["content", "Anyways here's wonderwall"], ["language", "english"], ["difficulty", 1], ["created_at", "2018-08-24 17:41:16.463156"], ["updated_at", "2018-08-24 17:41:16.463156"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
